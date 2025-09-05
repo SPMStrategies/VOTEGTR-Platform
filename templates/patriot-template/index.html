@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="candidate-name">Loading...</h1>
+            <p class="campaign-slogan">Campaign Website</p>
+        </div>
+    </header>
+    
+    <nav class="nav">
+        <div class="container">
+            <a href="#about">About</a>
+            <a href="#issues">Issues</a>
+            <a href="#volunteer">Volunteer</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+    
+    <main class="main">
+        <section id="hero" class="hero">
+            <div class="container">
+                <h2>Vote <span class="hero-name">for Change</span></h2>
+                <p class="hero-office">Loading campaign information...</p>
+                <a href="#volunteer" class="cta-button">Join Our Campaign</a>
+            </div>
+        </section>
+        
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About the Candidate</h2>
+                <div class="biography">
+                    <p>Loading biography...</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="issues" class="section bg-light">
+            <div class="container">
+                <h2>Key Issues</h2>
+                <div class="issues-grid">
+                    <div class="issue-card">
+                        <h3>🇺🇸 America First</h3>
+                        <p>Putting American workers and families first in all policy decisions.</p>
+                    </div>
+                    <div class="issue-card">
+                        <h3>💼 Economy</h3>
+                        <p>Lower taxes, less regulation, and more jobs for hardworking Americans.</p>
+                    </div>
+                    <div class="issue-card">
+                        <h3>🛡️ Border Security</h3>
+                        <p>Securing our borders and enforcing our immigration laws.</p>
+                    </div>
+                    <div class="issue-card">
+                        <h3>⚖️ Law & Order</h3>
+                        <p>Supporting our law enforcement and keeping communities safe.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="volunteer" class="section">
+            <div class="container">
+                <h2>Join Our Campaign</h2>
+                <p class="text-center">We need patriots like you to help win this election!</p>
+                <form name="volunteer" method="POST" data-netlify="true" class="volunteer-form">
+                    <div class="form-row">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-row">
+                        <input type="tel" name="phone" placeholder="Phone Number">
+                        <input type="text" name="zip" placeholder="ZIP Code">
+                    </div>
+                    <textarea name="message" placeholder="How would you like to help?" rows="4"></textarea>
+                    <button type="submit" class="submit-button">Sign Me Up!</button>
+                </form>
+            </div>
+        </section>
+        
+        <section id="contact" class="section bg-light">
+            <div class="container">
+                <h2>Contact Campaign Headquarters</h2>
+                <div class="contact-info">
+                    <p>Email: <span class="campaign-email">info@campaign.com</span></p>
+                    <p>Phone: <span class="campaign-phone">(555) 123-4567</span></p>
+                    <p>Address: <span class="campaign-headquarters">Campaign HQ</span></p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <p class="disclaimer">Paid for by <span class="footer-campaign">the Campaign</span></p>
+            <p>&copy; 2024 All Rights Reserved | <a href="#" style="color: white;">Privacy Policy</a></p>
+        </div>
+    </footer>
+    
+    <script>
+        // Load configuration and update page
+        fetch('site.config.json')
+            .then(res => res.json())
+            .then(config => {
+                // Update all elements with campaign data
+                document.querySelector('.candidate-name').textContent = config.candidate.name || 'Candidate Name';
+                document.querySelector('.campaign-slogan').textContent = config.candidate.slogan || 'Together We Win';
+                document.querySelector('.hero-name').textContent = config.candidate.name + ' for ' + config.candidate.office;
+                document.querySelector('.hero-office').textContent = 'Republican Candidate for ' + config.candidate.office;
+                
+                // Biography
+                const bio = document.querySelector('.biography');
+                if (config.candidate.bio) {
+                    bio.innerHTML = '<p>' + config.candidate.bio + '</p>';
+                }
+                
+                // Contact info
+                document.querySelector('.campaign-email').textContent = config.contact.email || 'info@campaign.com';
+                document.querySelector('.campaign-phone').textContent = config.contact.phone || '(555) 123-4567';
+                document.querySelector('.campaign-headquarters').textContent = config.contact.headquarters || 'Contact campaign for details';
+                
+                // Footer
+                document.querySelector('.footer-campaign').textContent = config.candidate.name + ' for ' + config.candidate.office;
+                
+                // Update title
+                document.title = config.candidate.name + ' for ' + config.candidate.office;
+                
+                // Update primary color if provided
+                if (config.branding && config.branding.primaryColor) {
+                    document.documentElement.style.setProperty('--primary-color', config.branding.primaryColor);
+                }
+            })
+            .catch(err => {
+                console.error('Error loading configuration:', err);
+            });
+    </script>
+</body>
+</html>

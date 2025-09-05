@@ -1,0 +1,25 @@
+{
+  "candidate": {
+    "name": "Your Name",
+    "office": "Office",
+    "party": "Republican",
+    "location": "Your District",
+    "bio": "Your biography will appear here. This is where you tell voters about your background, experience, and why you're running for office.",
+    "slogan": "Your Campaign Slogan",
+    "keyIssues": ""
+  },
+  "contact": {
+    "email": "info@yourcampaign.com",
+    "phone": "(555) 123-4567",
+    "headquarters": "123 Main Street, Your City, State 12345"
+  },
+  "branding": {
+    "primaryColor": "#DC2626",
+    "logo": null
+  },
+  "social": {
+    "facebook": "",
+    "twitter": "",
+    "instagram": ""
+  }
+}
